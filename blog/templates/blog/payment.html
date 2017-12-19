@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Page</title>
+  <link rel="stylesheet" href="{% static 'css/web.css' %}">
+  <script type="text/javascript" src="/static/js/script.js"></script>
+</head>
+<body class = "body_pay">
+  <p class = "par_meth">Payment method</p>
+  <div class = "list_method">
+    <div class = "row">
+      <img class = "method_image" src = "https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg"  id ="paypal_image">
+      <img class = "method_image" src = "https://www.hostmerchantservices.com/wp-content/uploads/2012/10/logo-Visa2.png" id = "visa_image">
+      <img class = "method_image" src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Maestro_Logo.svg/2000px-Maestro_Logo.svg.png"id = "maestro_image">
+      <img class = "method_image" src = "http://www.engage.it/wp-content/uploads/2014/02/mastercard1.gif" id = "mastercard_image">
+      </img>
+    </div>
+  </div>
+  <form action = "" id = "form_of_pay">
+    <div class = "container_pay">
+      <div class = "compilation_form">
+        <p class = "text_lable" id ="par_name_owner">Name Owner</p>
+        <input ="text" class = "text_compilation_form" id = "card_owner" value = "">
+        <p class = "text_lable" id ="par_number_card">Number Card</p>
+        <input ="text" class = "text_compilation_form" id = "number_card" value = "">
+        <p class = "text_lable" id ="par_cvc_card">CVC</p>
+        <input ="text" class = "text_compilation_form" id = "cvc_card" value = "">
+        <p class = "text_lable" id ="par_expiration_card">Expiration</p>
+        <input ="text" class = "text_compilation_form" id = "expiration_date_card" value = "">
+        <p class = "text_lable" id ="par_email">Email (For confirmation)</p>
+        <input ="text" class = "text_compilation_form" id = "email_card" value = ""></br>
+        <input type ="submit" class = "button_compilation_form" id = "payment_button" value = "submit payment" onclick="submitPay();">
+    </div>
+  </div>
+  </form>
+
+
+</body>
+</html>

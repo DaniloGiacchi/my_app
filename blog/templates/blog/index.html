@@ -1,0 +1,136 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home Housing Agency</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="{% static 'css/web.css' %}">
+  <script type="text/javascript" src="/static/js/script.js"></script>
+
+</head>
+<script>
+
+function setSrc(url){
+
+    if (typeof(Storage) !== "undefined") {
+        window.localStorage.setItem("img_url",url[0]);
+        window.localStorage.setItem("img_url_living",url[1]);
+        window.localStorage.setItem("img_url_dining",url[2]);
+        window.localStorage.setItem("img_url_living_2",url[3]);
+        window.localStorage.setItem("description_house",url[4]);
+        window.localStorage.setItem("price_house",url[5]);
+    }
+
+
+}
+function createHouse(counter){
+  {%for apart in data %}
+    if({{forloop.counter}} == counter){
+      eval("var other_img_"+{{forloop.counter}}+" = ['{{apart.bedroom}}','{{apart.livingroom}}','{{apart.diningroom}}','{{apart.livingroom2}}','{{apart.text}}','{{apart.price}}']");
+      setSrc(eval("other_img_"+{{forloop.counter}}+""));
+    }
+  {%endfor%}
+}
+
+
+
+    </script>
+
+    <body>
+      <div class="topnav" id="myTopnav">
+        <a href="#home" class="active">Home</a>
+        <a href="#rooms">Rooms</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+      <!-- Header -->
+      <header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
+        <img class="w3-image" id="img1" src="https://i.pinimg.com/originals/db/22/04/db2204b8156b492acfdab85cc7d5c1f4.jpg" alt="Architecture" width="1500" height="800">
+      </header>
+      <!-- Page content -->
+      <div class="w3-content w3-padding" style="max-width:1564px">
+      <!-- Project Section -->
+        <div class="w3-container w3-padding-32" id="rooms">
+
+            <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Find your house </br><h6>Click on your room to know more</h6></h3>
+
+        </div>
+      </div>
+      <div class = "container-gallery">
+        <script>
+
+      </script>
+        {%for apart in data%}
+          <a href="room.html"><img class = "gallery-img" onClick = "createHouse({{forloop.counter}});" src="{{apart.bedroom}}" id = "image_gallery_{{forloop.counter}}"></a>
+        {%endfor%}
+
+        </div>
+      <!-- About Section -->
+      <div class="w3-container w3-padding-32" id="about">
+        <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">About</h3>
+          <p>Each year, our company rents out more then 1500 properties.
+     Our most important aspects are giving our tenants a high service quality and service level.
+    This automatically means better living,- and housing conditions.
+     The tenant is our center point and we are here to help them!   </p>
+      </div>
+
+      <div class="w3-row-padding w3-grayscale">
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <h3>John Doe</h3>
+          <p class="w3-opacity">CEO & Founder</p>
+          <p>Hello, my name is John Doe and I am managing various properties and buildings.
+             Are there any problems or defects? I will make sure everything will be repaired.
+             Every week I visit my properties. I also do viewings and check- in and check outs.</p>
+          <a href = "#contact"><p><button class="w3-button w3-light-grey w3-block">Contact</button></p></a>
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <h3>Jane Doe</h3>
+          <p class="w3-opacity">Business Administration</p>
+          <p>Good day, my name is Jane Doe and since 2011 I am working here.
+            I began as a real estate agent and currentlyi work on the financial- and personal department.
+             I am responsible for the complete finance and personnel.</p>
+          <a href = "#contact"><p><button class="w3-button w3-light-grey w3-block">Contact</button></p></a>
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <h3>Mike Ross</h3>
+          <p class="w3-opacity">commercial manager</p>
+          <p>Good day, my name is Mike Ross and since 2014 I am working here.
+            I am the commercial manager from the rental department.
+            I´m responsible for the total capacity of tenants in the properties which we are renting.</p>
+        <a href = "#contact"><p><button class="w3-button w3-light-grey w3-block">Contact</button></p></a>
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <h3>Dan Star</h3>
+          <p class="w3-opacity">Financial employee</p>
+          <p>My working activities are taking care of administration and monitoring payments.</p>
+          <a href = "#contact"><p><button class="w3-button w3-light-grey w3-block">Contact</button></p></a>
+        </div>
+      </div>
+      <!-- Contact Section -->
+      <div class="w3-container w3-padding-32" id="contact">
+        <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact us</h3>
+        <p>Lets get in touch and talk about your problem.</p>
+        <form action="#home" id = "contact_form">
+          <input class="w3-input" type="text" placeholder="Name" required name="Name">
+          <input class="w3-input w3-section" type="text" placeholder="Email" required name="Email" id = "email">
+          <input class="w3-input w3-section" type="text" placeholder="Subject" required name="Subject">
+          <input class="w3-input w3-section" type="text" placeholder="Comment" required name="Comment">
+          <button class="w3-button w3-black w3-section" type="submit" onclick="sendMessage(document.getElementById('email'));">
+            <i class="fa fa-paper-plane"></i> SEND MESSAGE
+          </button>
+        </form>
+      </div>
+    <!-- End page content -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-center w3-black w3-padding-16">
+      <p>Powered by Anonymus</p>
+    </footer>
+
+    </body>
+    </html>

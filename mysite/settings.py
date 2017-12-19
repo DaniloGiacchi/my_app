@@ -23,13 +23,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*fh+wxr_g!i=f%ei)st^xt%1(e+91f4ul98uiqv@6sbkonps7='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+"""DEBUG = True"""
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+DEBUG = False
 
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 # Application definition
-
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'blog',
 ]
 
@@ -73,13 +82,23 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
+#this is used to blind a postgres_db
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'websitedb',
+        'USER': 'postgres',
+        'PASSWORD': 'danilog24',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+#DATABASES = {
+ #   'default': {
+   #     'ENGINE': 'django.db.backends.sqlite3',
+  #      'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+ #   }
+#}
 
 
 # Password validation
@@ -120,3 +139,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    'C:/Users/Asus/djangogirls/blog/static/',
+]
+import dj_database_url
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
